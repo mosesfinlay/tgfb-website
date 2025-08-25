@@ -33,7 +33,9 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({ heading, links, media, 
           </div>
 
           {description && (
-            <p className="text-xl font-light text-white/95 whitespace-pre-line">{description}</p>
+            <p className="lg:text-[1.4rem] max-w-md text-xl leading-relaxed font-light text-white/95 whitespace-pre-line">
+              {description}
+            </p>
           )}
 
           {Array.isArray(links) && links.length > 0 && (

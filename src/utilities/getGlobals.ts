@@ -1,26 +1,27 @@
-import type { Config } from 'src/payload-types'
+import type { Config } from "src/payload-types";
 
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
-import { unstable_cache } from 'next/cache'
+import configPromise from "@payload-config";
+import { getPayload } from "payload";
+import { unstable_cache } from "next/cache";
 
-type Global = keyof Config['globals']
+type Global = keyof Config["globals"];
+type GlobalData<T extends Global> = Config["globals"][T];
 
-async function getGlobal(slug: Global, depth = 0) {
-  const payload = await getPayload({ config: configPromise })
+async function getGlobal<T extends Global>(slug: T, depth = 0): Promise<GlobalData<T>> {
+  const payload = await getPayload({ config: configPromise });
 
   const global = await payload.findGlobal({
     slug,
-    depth,
-  })
+    depth
+  });
 
-  return global
+  return global as GlobalData<T>;
 }
 
 /**
  * Returns a unstable_cache function mapped with the cache tag for the slug
  */
-export const getCachedGlobal = (slug: Global, depth = 0) =>
+export const getCachedGlobal = <T extends Global>(slug: T, depth = 0) =>
   unstable_cache(async () => getGlobal(slug, depth), [slug], {
-    tags: [`global_${slug}`],
-  })
+    tags: [`global_${slug}`]
+  });

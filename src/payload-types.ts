@@ -1569,6 +1569,11 @@ export interface Header {
  */
 export interface Footer {
   id: number;
+  title: string;
+  description?: string | null;
+  twitterLink?: string | null;
+  instagramLink?: string | null;
+  tiktokLink?: string | null;
   navItems?:
     | {
         link: {
@@ -1620,6 +1625,11 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  twitterLink?: T;
+  instagramLink?: T;
+  tiktokLink?: T;
   navItems?:
     | T
     | {
