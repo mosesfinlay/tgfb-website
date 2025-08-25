@@ -15,7 +15,8 @@ const buttonVariants = cva(
         clear: "",
         default: "h-10 px-4 py-2",
         icon: "h-10 w-10",
-        lg: "h-11 rounded px-8 text-base",
+        lg: "h-11 rounded px-6 text-base",
+        xl: "h-12 rounded px-6 text-lg",
         sm: "h-9 rounded px-3"
       },
       variant: {
@@ -25,7 +26,8 @@ const buttonVariants = cva(
         link: "text-primary items-start justify-start underline-offset-4 hover:underline",
         outline: "border border-border bg-background hover:bg-card hover:text-accent-foreground",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        lightBlue: "bg-blue-light text-dark hover:bg-white"
+        lightBlue: "bg-blue-light text-dark hover:bg-white text-black/90",
+        orange: "bg-orange text-white hover:bg-white hover:text-orange"
       }
     }
   }

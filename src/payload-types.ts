@@ -178,7 +178,15 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | RiverAffiliateBlock
+    | LatestPodcastsBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -723,6 +731,46 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RiverAffiliateBlock".
+ */
+export interface RiverAffiliateBlock {
+  title?: string | null;
+  description?: string | null;
+  affiliateLink: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'riverAffiliate';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestPodcastsBlock".
+ */
+export interface LatestPodcastsBlock {
+  title: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'latestPodcasts';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1013,6 +1061,8 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        riverAffiliate?: T | RiverAffiliateBlockSelect<T>;
+        latestPodcasts?: T | LatestPodcastsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1109,6 +1159,35 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RiverAffiliateBlock_select".
+ */
+export interface RiverAffiliateBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  affiliateLink?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestPodcastsBlock_select".
+ */
+export interface LatestPodcastsBlockSelect<T extends boolean = true> {
+  title?: T;
   id?: T;
   blockName?: T;
 }

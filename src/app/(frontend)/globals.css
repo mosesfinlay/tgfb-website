@@ -93,11 +93,6 @@
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
     font-family: var(--font-fk-grotesk);
   }
-
-  h1,
-  h2 {
-    font-family: var(--font-pp-eiko);
-  }
 }
 
 @layer utilities {
