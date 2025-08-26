@@ -1,20 +1,26 @@
 const redirects = async () => {
   const internetExplorerRedirect = {
-    destination: '/ie-incompatible.html',
+    destination: "/ie-incompatible.html",
     has: [
       {
-        type: 'header',
-        key: 'user-agent',
-        value: '(.*Trident.*)', // all ie browsers
-      },
+        type: "header",
+        key: "user-agent",
+        value: "(.*Trident.*)" // all ie browsers
+      }
     ],
     permanent: false,
-    source: '/:path((?!ie-incompatible.html$).*)', // all pages except the incompatibility page
-  }
+    source: "/:path((?!ie-incompatible.html$).*)" // all pages except the incompatibility page
+  };
 
-  const redirects = [internetExplorerRedirect]
+  const postsToArticlesRedirect = {
+    source: "/posts/:path*",
+    destination: "/articles/:path*",
+    permanent: true
+  };
 
-  return redirects
-}
+  const redirects = [internetExplorerRedirect, postsToArticlesRedirect];
 
-export default redirects
+  return redirects;
+};
+
+export default redirects;

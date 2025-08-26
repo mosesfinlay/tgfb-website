@@ -1,12 +1,15 @@
 import type { CollectionConfig } from "payload";
 
 import {
+  BlockquoteFeature,
   BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   HorizontalRuleFeature,
   InlineToolbarFeature,
-  lexicalEditor
+  lexicalEditor,
+  OrderedListFeature,
+  UnorderedListFeature
 } from "@payloadcms/richtext-lexical";
 
 import { authenticated } from "../../access/authenticated";
@@ -94,6 +97,9 @@ export const Posts: CollectionConfig<"posts"> = {
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ["h1", "h2", "h3", "h4"] }),
                     BlocksFeature({ blocks: [Banner, Code, MediaBlock, YouTubeEmbed] }),
+                    BlockquoteFeature(),
+                    OrderedListFeature(),
+                    UnorderedListFeature(),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature()
