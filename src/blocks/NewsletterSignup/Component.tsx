@@ -14,7 +14,7 @@ export const NewsletterSignupBlock: React.FC<NewsletterSignupProps> = ({ title, 
       }}
     >
       <div className="container">
-        <div className="relative border-x-2 border-white/20 space-y-8 py-12 section-container">
+        <div className="relative border-x-2 border-white/20 py-16 section-container">
           <Image
             src="/newsletter-bg-pattern.svg"
             alt="Newsletter Background"
@@ -34,13 +34,17 @@ export const NewsletterSignupBlock: React.FC<NewsletterSignupProps> = ({ title, 
             )}
 
             <div className="max-w-2xl space-y-6">
+              <p>Still have to add the Klaviyo form here</p>
               <div className="flex flex-col sm:flex-row gap-4 max-w-lg">
+                {/* <div className="klaviyo-form-U3u73n"></div> */}
                 <Input
                   type="email"
                   placeholder="Your email address"
+                  disabled
                   className="flex-1 rounded-[0.5rem] bg-white/90 py-4 text-gray-600 placeholder:text-gray-400 h-12 px-4 text-lg border-white border-0 focus-visible:ring-2 focus-visible:ring-neutral-500/50"
                 />
                 <Button
+                  disabled
                   className="px-8 h-12 text-lg rounded-[0.5rem] whitespace-nowrap"
                   variant="red"
                 >
