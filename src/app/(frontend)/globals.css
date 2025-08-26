@@ -97,7 +97,7 @@
 
 @layer utilities {
   .container {
-    @apply max-w-screen-xl xl:px-[4.5rem] px-4 mx-auto;
+    @apply max-w-screen-xl px-0 lg:px-4 xl:px-[4.5rem] mx-auto;
   }
 
   .section-container {

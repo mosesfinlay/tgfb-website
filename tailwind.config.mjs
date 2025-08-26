@@ -93,6 +93,7 @@ const config = {
         error: "hsl(var(--error))",
         warning: "hsl(var(--warning))",
         orange: "#ff8a05",
+        red: "#cb3131",
         "blue-light": "#badef8"
       },
       fontFamily: {

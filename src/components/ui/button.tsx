@@ -27,7 +27,8 @@ const buttonVariants = cva(
         outline: "border border-border bg-background hover:bg-card hover:text-accent-foreground",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         lightBlue: "bg-blue-light text-dark hover:bg-white text-black/90",
-        orange: "bg-orange text-white hover:bg-white hover:text-orange"
+        orange: "bg-orange text-white hover:bg-white hover:text-orange",
+        red: "bg-red text-white hover:bg-red/90"
       }
     }
   }

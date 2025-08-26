@@ -14,6 +14,7 @@ import { populatePublishedAt } from "../../hooks/populatePublishedAt";
 import { generatePreviewPath } from "../../utilities/generatePreviewPath";
 import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
 import { LatestPodcasts } from "@/blocks/LatestPodcasts/config";
+import { NewsletterSignup } from "@/blocks/NewsletterSignup/config";
 
 import {
   MetaDescriptionField,
@@ -84,7 +85,8 @@ export const Pages: CollectionConfig<"pages"> = {
                 Archive,
                 FormBlock,
                 RiverAffiliate,
-                LatestPodcasts
+                LatestPodcasts,
+                NewsletterSignup
               ],
               required: true,
               admin: {

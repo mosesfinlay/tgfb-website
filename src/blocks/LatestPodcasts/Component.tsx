@@ -7,11 +7,11 @@ export type LatestPodcastsProps = {
   title: string;
 };
 
-export const LatestPodcasts: React.FC<LatestPodcastsProps> = ({ title }) => {
+export const LatestPodcastsBlock: React.FC<LatestPodcastsProps> = ({ title }) => {
   return (
     <section>
       <div className="container">
-        <div className="border-x-2 border-b-2 border-muted space-y-8 pt-24 pb-12 section-container">
+        <div className="border-x-2 border-b-2 border-muted space-y-8 py-24 section-container">
           {title && <SectionHeader>{title}</SectionHeader>}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

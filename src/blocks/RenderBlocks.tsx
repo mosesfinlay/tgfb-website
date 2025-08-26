@@ -8,7 +8,8 @@ import { RiverAffiliateBlock } from "@/blocks/RiverAffiliate/Component";
 import { ContentBlock } from "@/blocks/Content/Component";
 import { FormBlock } from "@/blocks/Form/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
-import { LatestPodcasts } from "@/blocks/LatestPodcasts/Component";
+import { LatestPodcastsBlock } from "@/blocks/LatestPodcasts/Component";
+import { NewsletterSignupBlock } from "@/blocks/NewsletterSignup/Component";
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -17,7 +18,8 @@ const blockComponents = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   riverAffiliate: RiverAffiliateBlock,
-  latestPodcasts: LatestPodcasts
+  latestPodcasts: LatestPodcastsBlock,
+  newsletterSignup: NewsletterSignupBlock
 };
 
 export const RenderBlocks: React.FC<{
@@ -39,8 +41,7 @@ export const RenderBlocks: React.FC<{
             if (Block) {
               return (
                 <div key={index}>
-                  {/* @ts-expect-error there may be some mismatch between the expected types here */}
-                  <Block {...block} disableInnerContainer />
+                  <Block {...(block as any)} disableInnerContainer />
                 </div>
               );
             }

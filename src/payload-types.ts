@@ -186,6 +186,7 @@ export interface Page {
     | FormBlock
     | RiverAffiliateBlock
     | LatestPodcastsBlock
+    | NewsletterSignupBlock
   )[];
   meta?: {
     title?: string | null;
@@ -771,6 +772,17 @@ export interface LatestPodcastsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NewsletterSignupBlock".
+ */
+export interface NewsletterSignupBlock {
+  title?: string | null;
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'newsletterSignup';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1063,6 +1075,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         riverAffiliate?: T | RiverAffiliateBlockSelect<T>;
         latestPodcasts?: T | LatestPodcastsBlockSelect<T>;
+        newsletterSignup?: T | NewsletterSignupBlockSelect<T>;
       };
   meta?:
     | T
@@ -1188,6 +1201,16 @@ export interface RiverAffiliateBlockSelect<T extends boolean = true> {
  */
 export interface LatestPodcastsBlockSelect<T extends boolean = true> {
   title?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NewsletterSignupBlock_select".
+ */
+export interface NewsletterSignupBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
   id?: T;
   blockName?: T;
 }
