@@ -1810,6 +1810,24 @@ export interface CodeBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YouTubeEmbedBlock".
+ */
+export interface YouTubeEmbedBlock {
+  /**
+   * Enter the YouTube video ID (e.g., "dQw4w9WgXcQ" from https://youtube.com/watch?v=dQw4w9WgXcQ)
+   */
+  videoId: string;
+  /**
+   * Optional title for accessibility and SEO
+   */
+  title?: string | null;
+  aspectRatio?: ('16:9' | '4:3' | '1:1') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'youtubeEmbed';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

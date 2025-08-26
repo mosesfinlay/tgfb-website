@@ -10,6 +10,7 @@ import { FormBlock } from "@/blocks/Form/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import { LatestPodcastsBlock } from "@/blocks/LatestPodcasts/Component";
 import { NewsletterSignupBlock } from "@/blocks/NewsletterSignup/Component";
+import { YouTubeEmbedBlock } from "@/blocks/YouTubeEmbed/Component";
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -19,7 +20,8 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   riverAffiliate: RiverAffiliateBlock,
   latestPodcasts: LatestPodcastsBlock,
-  newsletterSignup: NewsletterSignupBlock
+  newsletterSignup: NewsletterSignupBlock,
+  youtubeEmbed: YouTubeEmbedBlock
 };
 
 export const RenderBlocks: React.FC<{
