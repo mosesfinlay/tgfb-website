@@ -13,7 +13,7 @@ export const RiverAffiliateBlock: React.FC<RiverAffiliateBlockProps> = ({
   return (
     <section className="bg-[#252525]">
       <div className="container">
-        <div className="flex flex-col md:flex-row items-start justify-between md:items-center section-container gap-x-8 gap-y-4 py-12 border-x-2 border-white/20">
+        <div className="section-container flex flex-col md:flex-row items-start justify-between md:items-center gap-x-8 gap-y-4 py-12 md:border-white/20">
           <div>
             <Image
               src="/river-logo.svg"

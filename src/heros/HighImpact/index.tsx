@@ -23,7 +23,7 @@ export const HighImpactHero: React.FC<Page["hero"]> = ({ heading, links, media, 
       }}
     >
       <div className="container relative z-10">
-        <div className="border-x-2 px-4 md:px-10 space-y-4 md:space-y-10 py-32 border-white/20">
+        <div className="section-container space-y-4 md:space-y-10 py-32 md:border-white/20">
           <div className="border-l-2 pl-4 md:pl-10 -ml-[calc(1rem+2px)] md:-ml-[calc(2.5rem+2px)] border-orange">
             {heading && (
               <h1 className="text-orange font-title tracking-tight font-bold text-5xl md:text-7xl lg:text-[5rem] whitespace-pre-line">

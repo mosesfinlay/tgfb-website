@@ -14,7 +14,7 @@ export const NewsletterSignupBlock: React.FC<NewsletterSignupProps> = ({ title, 
       }}
     >
       <div className="container">
-        <div className="relative border-x-2 border-white/20 py-16 section-container">
+        <div className="section-container relative py-16 md:border-white/20">
           <Image
             src="/newsletter-bg-pattern.svg"
             alt="Newsletter Background"

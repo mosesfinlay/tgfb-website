@@ -1,7 +1,7 @@
 "use client";
 
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { FaExternalLinkAlt, FaTiktok } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa";
 import Image from "next/image";
 import React from "react";
 
@@ -21,7 +21,7 @@ export const FooterClient: React.FC<FooterClientProps> = ({
   return (
     <footer className="bg-white text-neutral-700">
       <div className="container">
-        <div className="relative border-x-2 border-muted space-y-8 py-12 section-container">
+        <div className="relative section-container space-y-8 py-12 md:border-x-2 md:border-muted">
           <div className="flex flex-col flex-wrap md:flex-row md:items-start gap-8">
             <div className="shrink-0">
               <Image src="/tgfb-logo-icon.svg" alt="TGFB Logo" width={42} height={42} />
