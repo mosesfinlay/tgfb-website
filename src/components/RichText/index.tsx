@@ -13,12 +13,14 @@ import {
 
 import { CodeBlock, CodeBlockProps } from "@/blocks/Code/Component";
 import { YouTubeEmbedBlock } from "@/blocks/YouTubeEmbed/Component";
+import { TwitterEmbedBlock } from "@/blocks/TwitterEmbed/Component";
 
 import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
-  YouTubeEmbedBlock as YouTubeEmbedBlockProps
+  YouTubeEmbedBlock as YouTubeEmbedBlockProps,
+  TwitterEmbedBlock as TwitterEmbedBlockProps
 } from "@/payload-types";
 import { BannerBlock } from "@/blocks/Banner/Component";
 import { CallToActionBlock } from "@/blocks/CallToAction/Component";
@@ -27,7 +29,12 @@ import { cn } from "@/utilities/ui";
 type NodeTypes =
   | DefaultNodeTypes
   | SerializedBlockNode<
-      CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps | YouTubeEmbedBlockProps
+      | CTABlockProps
+      | MediaBlockProps
+      | BannerBlockProps
+      | CodeBlockProps
+      | YouTubeEmbedBlockProps
+      | TwitterEmbedBlockProps
     >;
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -56,7 +63,8 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     ),
     code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
-    youtubeEmbed: ({ node }) => <YouTubeEmbedBlock className="col-start-2" {...node.fields} />
+    youtubeEmbed: ({ node }) => <YouTubeEmbedBlock className="col-start-2" {...node.fields} />,
+    twitterEmbed: ({ node }) => <TwitterEmbedBlock className="col-start-2" {...node.fields} />
   }
 });
 

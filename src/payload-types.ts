@@ -1828,6 +1828,19 @@ export interface YouTubeEmbedBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TwitterEmbedBlock".
+ */
+export interface TwitterEmbedBlock {
+  /**
+   * Enter the full Twitter/X URL (e.g., "https://twitter.com/username/status/1234567890" or "https://x.com/username/status/1234567890")
+   */
+  tweetUrl: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'twitterEmbed';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

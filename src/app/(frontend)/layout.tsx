@@ -88,6 +88,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           {children}
           <Footer />
         </Providers>
+
+        <script async src="https://platform.twitter.com/widgets.js" defer></script>
       </body>
     </html>
   );

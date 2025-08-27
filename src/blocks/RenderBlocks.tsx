@@ -11,6 +11,7 @@ import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import { LatestPodcastsBlock } from "@/blocks/LatestPodcasts/Component";
 import { NewsletterSignupBlock } from "@/blocks/NewsletterSignup/Component";
 import { YouTubeEmbedBlock } from "@/blocks/YouTubeEmbed/Component";
+import { TwitterEmbedBlock } from "@/blocks/TwitterEmbed/Component";
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -21,7 +22,8 @@ const blockComponents = {
   riverAffiliate: RiverAffiliateBlock,
   latestPodcasts: LatestPodcastsBlock,
   newsletterSignup: NewsletterSignupBlock,
-  youtubeEmbed: YouTubeEmbedBlock
+  youtubeEmbed: YouTubeEmbedBlock,
+  twitterEmbed: TwitterEmbedBlock
 };
 
 export const RenderBlocks: React.FC<{
