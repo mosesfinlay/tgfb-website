@@ -9,6 +9,7 @@ import { ContentBlock } from "@/blocks/Content/Component";
 import { FormBlock } from "@/blocks/Form/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import { LatestPodcastsBlock } from "@/blocks/LatestPodcasts/Component";
+import { AllPostsBlock } from "@/blocks/AllPosts/Component";
 import { NewsletterSignupBlock } from "@/blocks/NewsletterSignup/Component";
 import { YouTubeEmbedBlock } from "@/blocks/YouTubeEmbed/Component";
 import { TwitterEmbedBlock } from "@/blocks/TwitterEmbed/Component";
@@ -21,6 +22,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   riverAffiliate: RiverAffiliateBlock,
   latestPodcasts: LatestPodcastsBlock,
+  allPosts: AllPostsBlock,
   newsletterSignup: NewsletterSignupBlock,
   youtubeEmbed: YouTubeEmbedBlock,
   twitterEmbed: TwitterEmbedBlock

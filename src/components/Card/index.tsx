@@ -7,8 +7,14 @@ import React, { Fragment } from "react";
 import type { Post } from "@/payload-types";
 
 import { Media } from "@/components/Media";
+import Image from "next/image";
+import { RichText } from "@payloadcms/richtext-lexical/react";
+import { convertLexicalToPlaintext } from "@payloadcms/richtext-lexical/plaintext";
 
-export type CardPostData = Pick<Post, "slug" | "categories" | "meta" | "title">;
+export type CardPostData = Pick<
+  Post,
+  "slug" | "categories" | "meta" | "title" | "heroImage" | "content"
+>;
 
 export const Card: React.FC<{
   alignItems?: "center";
@@ -21,12 +27,13 @@ export const Card: React.FC<{
   const { card, link } = useClickableCard({});
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props;
 
-  const { slug, categories, meta, title } = doc || {};
-  const { description, image: metaImage } = meta || {};
+  const { slug, categories, meta, title, heroImage, content } = doc || {};
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0;
   const titleToUse = titleFromProps || title;
-  const sanitizedDescription = description?.replace(/\s/g, " "); // replace non-breaking space with white space
+
+  const description = convertLexicalToPlaintext({ data: content });
+
   const href = `/${relationTo}/${slug}`;
 
   return (
@@ -37,47 +44,37 @@ export const Card: React.FC<{
       )}
       ref={card.ref}
     >
-      <div className="relative w-full ">
-        {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== "string" && <Media resource={metaImage} size="33vw" />}
+      <div className="relative aspect-video w-full overflow-hidden">
+        {heroImage && typeof heroImage !== "string" && (
+          <Media
+            resource={heroImage}
+            size="33vw"
+            className="w-full h-full object-center object-cover"
+          />
+        )}
+        {!heroImage && (
+          <Image
+            src="/article-blank-image.jpg"
+            alt="Placeholder"
+            width={300}
+            height={300}
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
       <div className="p-4">
-        {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4">
-            {showCategories && hasCategories && (
-              <div>
-                {categories?.map((category, index) => {
-                  if (typeof category === "object") {
-                    const { title: titleFromCategory } = category;
-
-                    const categoryTitle = titleFromCategory || "Untitled category";
-
-                    const isLast = index === categories.length - 1;
-
-                    return (
-                      <Fragment key={index}>
-                        {categoryTitle}
-                        {!isLast && <Fragment>, &nbsp;</Fragment>}
-                      </Fragment>
-                    );
-                  }
-
-                  return null;
-                })}
-              </div>
-            )}
-          </div>
-        )}
         {titleToUse && (
-          <div className="prose">
-            <h3>
-              <Link className="not-prose" href={href} ref={link.ref}>
-                {titleToUse}
-              </Link>
-            </h3>
+          <h3 className="line-clamp-2 text-lg font-semibold">
+            <Link className="not-prose" href={href} ref={link.ref}>
+              {titleToUse}
+            </Link>
+          </h3>
+        )}
+        {description && (
+          <div className="mt-2 line-clamp-4 text-sm">
+            <p>{description}</p>
           </div>
         )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
       </div>
     </article>
   );

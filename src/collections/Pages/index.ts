@@ -14,6 +14,7 @@ import { populatePublishedAt } from "../../hooks/populatePublishedAt";
 import { generatePreviewPath } from "../../utilities/generatePreviewPath";
 import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
 import { LatestPodcasts } from "@/blocks/LatestPodcasts/config";
+import { AllPosts } from "@/blocks/AllPosts/config";
 import { NewsletterSignup } from "@/blocks/NewsletterSignup/config";
 
 import {
@@ -86,6 +87,7 @@ export const Pages: CollectionConfig<"pages"> = {
                 FormBlock,
                 RiverAffiliate,
                 LatestPodcasts,
+                AllPosts,
                 NewsletterSignup
               ],
               required: true,

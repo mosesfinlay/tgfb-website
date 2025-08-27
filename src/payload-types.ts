@@ -186,6 +186,7 @@ export interface Page {
     | FormBlock
     | RiverAffiliateBlock
     | LatestPodcastsBlock
+    | AllPostsBlock
     | NewsletterSignupBlock
   )[];
   meta?: {
@@ -772,6 +773,16 @@ export interface LatestPodcastsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AllPostsBlock".
+ */
+export interface AllPostsBlock {
+  title: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'allPosts';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "NewsletterSignupBlock".
  */
 export interface NewsletterSignupBlock {
@@ -1075,6 +1086,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         riverAffiliate?: T | RiverAffiliateBlockSelect<T>;
         latestPodcasts?: T | LatestPodcastsBlockSelect<T>;
+        allPosts?: T | AllPostsBlockSelect<T>;
         newsletterSignup?: T | NewsletterSignupBlockSelect<T>;
       };
   meta?:
@@ -1200,6 +1212,15 @@ export interface RiverAffiliateBlockSelect<T extends boolean = true> {
  * via the `definition` "LatestPodcastsBlock_select".
  */
 export interface LatestPodcastsBlockSelect<T extends boolean = true> {
+  title?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AllPostsBlock_select".
+ */
+export interface AllPostsBlockSelect<T extends boolean = true> {
   title?: T;
   id?: T;
   blockName?: T;
