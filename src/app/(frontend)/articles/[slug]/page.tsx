@@ -15,6 +15,7 @@ import { generateMeta } from "@/utilities/generateMeta";
 import PageClient from "./page.client";
 import { LivePreviewListener } from "@/components/LivePreviewListener";
 import { NewsletterSignupBlock } from "@/blocks/NewsletterSignup/Component";
+import { getServerSideURL } from "@/utilities/getURL";
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise });
@@ -50,8 +51,56 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   if (!post) return <PayloadRedirects url={url} />;
 
+  const serverUrl = getServerSideURL();
+  const postUrl = `${serverUrl}/articles/${post.slug}`;
+
+  // Generate JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    url: postUrl,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    author:
+      post.populatedAuthors
+        ?.filter((author) => author?.name)
+        .map((author) => ({
+          "@type": "Person",
+          name: author.name
+        })) || [],
+    publisher: {
+      "@type": "Organization",
+      name: "Thank God For Bitcoin",
+      url: serverUrl
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": postUrl
+    },
+    description: post.meta?.description || ""
+  };
+
+  // Add image if available
+  if (post.heroImage && typeof post.heroImage === "object") {
+    const imageUrl = post.heroImage.sizes?.og?.url || post.heroImage.url;
+    if (imageUrl) {
+      jsonLd.image = `${serverUrl}${imageUrl}`;
+    }
+  } else if (post.meta?.image && typeof post.meta.image === "object") {
+    const imageUrl = post.meta.image.sizes?.og?.url || post.meta.image.url;
+    if (imageUrl) {
+      jsonLd.image = `${serverUrl}${imageUrl}`;
+    }
+  }
+
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <PageClient />
 
       {/* Allows redirects for valid pages too */}
@@ -102,6 +151,22 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
     limit: 1,
     overrideAccess: draft,
     pagination: false,
+    select: {
+      title: true,
+      slug: true,
+      content: true,
+      heroImage: true,
+      relatedPosts: true,
+      categories: true,
+      publishedAt: true,
+      updatedAt: true,
+      populatedAuthors: true,
+      meta: {
+        title: true,
+        description: true,
+        image: true
+      }
+    },
     where: {
       slug: {
         equals: slug

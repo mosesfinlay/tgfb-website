@@ -24,24 +24,90 @@ export const generateMeta = async (args: {
 }): Promise<Metadata> => {
   const { doc } = args;
 
-  const ogImage = getImageURL(doc?.meta?.image);
+  const isPost = doc && "publishedAt" in doc;
+  const serverUrl = getServerSideURL();
 
-  const title = doc?.meta?.title ? doc?.meta?.title + " | TGFB" : "Thank God For Bitcoin";
+  // Determine the best image: meta.image -> heroImage -> fallback
+  let ogImage = getImageURL(doc?.meta?.image);
+  if ((!doc?.meta?.image || ogImage.includes("/website-template-OG.webp")) && isPost) {
+    const postDoc = doc as Partial<Post>;
+    if (postDoc.heroImage) {
+      ogImage = getImageURL(postDoc.heroImage);
+    }
+  }
 
-  return {
-    description: doc?.meta?.description,
-    openGraph: mergeOpenGraph({
-      description: doc?.meta?.description || "",
-      images: ogImage
-        ? [
-            {
-              url: ogImage
-            }
-          ]
-        : undefined,
-      title,
-      url: Array.isArray(doc?.slug) ? doc?.slug.join("/") : "/"
-    }),
-    title
+  // Determine the best title: meta.title -> post.title -> fallback
+  let title = doc?.meta?.title;
+  if (!title && isPost) {
+    const postDoc = doc as Partial<Post>;
+    title = postDoc.title;
+  }
+  title = title ? title + " | TGFB" : "Thank God For Bitcoin";
+
+  // Build canonical URL
+  let canonicalUrl = "/";
+  if (doc?.slug) {
+    if (isPost) {
+      canonicalUrl = `/articles/${doc.slug}`;
+    } else {
+      canonicalUrl = Array.isArray(doc.slug) ? `/${doc.slug.join("/")}` : `/${doc.slug}`;
+    }
+  }
+  const fullCanonicalUrl = serverUrl + canonicalUrl;
+
+  // Build Open Graph metadata
+  const openGraphData: any = {
+    description: doc?.meta?.description || "",
+    images: ogImage
+      ? [
+          {
+            url: ogImage,
+            alt: title
+          }
+        ]
+      : undefined,
+    title,
+    url: fullCanonicalUrl,
+    type: isPost ? "article" : "website"
   };
+
+  // Add post-specific Open Graph data
+  if (isPost) {
+    const postDoc = doc as Partial<Post>;
+
+    if (postDoc.publishedAt) {
+      openGraphData.publishedTime = postDoc.publishedAt;
+    }
+
+    if (postDoc.populatedAuthors && postDoc.populatedAuthors.length > 0) {
+      const validAuthors = postDoc.populatedAuthors.filter((author) => author && author.name);
+      if (validAuthors.length > 0) {
+        openGraphData.authors = validAuthors.map((author) => author.name!);
+      }
+    }
+  }
+
+  const metadata: Metadata = {
+    title,
+    description: doc?.meta?.description,
+    alternates: {
+      canonical: fullCanonicalUrl
+    },
+    openGraph: mergeOpenGraph(openGraphData)
+  };
+
+  // Add structured data for authors
+  if (isPost) {
+    const postDoc = doc as Partial<Post>;
+    if (postDoc.populatedAuthors && postDoc.populatedAuthors.length > 0) {
+      const validAuthors = postDoc.populatedAuthors.filter((author) => author && author.name);
+      if (validAuthors.length > 0) {
+        metadata.authors = validAuthors.map((author) => ({
+          name: author.name!
+        }));
+      }
+    }
+  }
+
+  return metadata;
 };
