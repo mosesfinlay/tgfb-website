@@ -30,8 +30,9 @@ const blockComponents = {
 
 export const RenderBlocks: React.FC<{
   blocks: Page["layout"][0][];
+  searchParams?: { page?: string };
 }> = (props) => {
-  const { blocks } = props;
+  const { blocks, searchParams } = props;
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0;
 
@@ -47,7 +48,11 @@ export const RenderBlocks: React.FC<{
             if (Block) {
               return (
                 <div key={index}>
-                  <Block {...(block as any)} disableInnerContainer />
+                  <Block
+                    {...(block as any)}
+                    disableInnerContainer
+                    searchParams={blockType === "allPosts" ? searchParams : undefined}
+                  />
                 </div>
               );
             }

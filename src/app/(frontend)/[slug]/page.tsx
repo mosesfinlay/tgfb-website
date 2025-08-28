@@ -41,11 +41,16 @@ type Args = {
   params: Promise<{
     slug?: string;
   }>;
+  searchParams: Promise<{ page?: string }>;
 };
 
-export default async function Page({ params: paramsPromise }: Args) {
+export default async function Page({
+  params: paramsPromise,
+  searchParams: searchParamsPromise
+}: Args) {
   const { isEnabled: draft } = await draftMode();
   const { slug = "home" } = await paramsPromise;
+  const searchParams = await searchParamsPromise;
   const url = "/" + slug;
 
   let page: RequiredDataFromCollectionSlug<"pages"> | null;
@@ -74,7 +79,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
 
       <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} />
+      <RenderBlocks blocks={layout} searchParams={searchParams} />
     </article>
   );
 }

@@ -23,18 +23,15 @@ export default async function Page() {
       title: true,
       slug: true,
       categories: true,
-      meta: true
+      meta: true,
+      content: true,
+      heroImage: true
     }
   });
 
   return (
     <div className="pt-24 pb-24">
       <PageClient />
-      <div className="container mb-16">
-        <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
-        </div>
-      </div>
 
       <div className="container mb-8">
         <PageRange
@@ -49,7 +46,7 @@ export default async function Page() {
 
       <div className="container">
         {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+          <Pagination page={posts.page} totalPages={posts.totalPages} basePath="/articles/page" />
         )}
       </div>
     </div>
@@ -58,6 +55,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Posts`
+    title: `TGFB Posts`
   };
 }

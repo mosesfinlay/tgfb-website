@@ -24,6 +24,12 @@ const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
+    meta: {
+      titleSuffix: " - TGFB",
+      title: "Thank God For Bitcoin",
+      description:
+        "Our goal is to educate and equip Christians to understand Bitcoin and use it for the glory of God and the good of people everywhere."
+    },
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.

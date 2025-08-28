@@ -777,6 +777,14 @@ export interface LatestPodcastsBlock {
  */
 export interface AllPostsBlock {
   title: string;
+  /**
+   * Number of posts to display per page
+   */
+  postsPerPage: number;
+  /**
+   * Enable pagination instead of load more functionality
+   */
+  enablePagination?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'allPosts';
@@ -1222,6 +1230,8 @@ export interface LatestPodcastsBlockSelect<T extends boolean = true> {
  */
 export interface AllPostsBlockSelect<T extends boolean = true> {
   title?: T;
+  postsPerPage?: T;
+  enablePagination?: T;
   id?: T;
   blockName?: T;
 }

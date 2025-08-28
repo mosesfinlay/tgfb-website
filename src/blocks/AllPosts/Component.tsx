@@ -9,16 +9,21 @@ import { AllPostsClient } from "./Component.client";
 export const AllPostsBlock: React.FC<
   AllPostsBlockProps & {
     id?: string;
+    searchParams?: { page?: string };
   }
 > = async (props) => {
-  const { id, title } = props;
+  const { id, title, postsPerPage = 6, enablePagination = false, searchParams } = props;
+
+  const currentPage = enablePagination ? Number(searchParams?.page) || 1 : 1;
+  const limit = enablePagination ? postsPerPage : 6;
 
   const payload = await getPayload({ config: configPromise });
 
   const posts = await payload.find({
     collection: "posts",
     depth: 1,
-    limit: 6,
+    limit,
+    page: currentPage,
     sort: "-publishedAt",
     overrideAccess: false,
     select: {
@@ -42,6 +47,9 @@ export const AllPostsBlock: React.FC<
             hasNextPage={posts.hasNextPage}
             currentPage={posts.page || 1}
             totalPages={posts.totalPages}
+            totalDocs={posts.totalDocs}
+            enablePagination={enablePagination || false}
+            postsPerPage={postsPerPage || 6}
           />
         </div>
       </div>
