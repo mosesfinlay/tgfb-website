@@ -1,26 +1,28 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from "payload";
 
-import { authenticated } from '../../access/authenticated'
+import { authenticated } from "../../access/authenticated";
 
 export const Users: CollectionConfig = {
-  slug: 'users',
+  slug: "users",
   access: {
     admin: authenticated,
     create: authenticated,
     delete: authenticated,
     read: authenticated,
-    update: authenticated,
+    update: authenticated
   },
   admin: {
-    defaultColumns: ['name', 'email'],
-    useAsTitle: 'name',
+    defaultColumns: ["name", "email"],
+    useAsTitle: "name"
   },
-  auth: true,
+  auth: {
+    tokenExpiration: 60 * 60 * 24 * 365 // 1 year
+  },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-    },
+      name: "name",
+      type: "text"
+    }
   ],
-  timestamps: true,
-}
+  timestamps: true
+};
